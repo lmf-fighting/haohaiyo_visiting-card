@@ -1,0 +1,28 @@
+<view class='set'>
+  <view class='card2'>
+    <view class='bg'>
+      <image src='../../../images/cardstyle/bj-2.png'></image>
+    </view>
+    <view class='content'>
+      <view class='ct-head'>
+        <text class='ct-text1'>{{cardInfo.name}}</text>
+        <text class='ct-text2'>{{cardInfo.jobInfo}}</text>
+        <text class='ct-foot-text1'>{{cardInfo.address}}</text>
+        <image src='{{cardInfo.headicon}}'></image>
+      </view>
+      <view class='ct-foot'>
+
+        <view class='ct-foot-text2'>
+          <image src='../../../images/cardstyle/address.png'></image>
+          <text>{{cardInfo.address}}</text>
+          <image src='../../../images/cardstyle/photo-num.png'></image>
+          <text>{{cardInfo.mobilephone}}</text>
+          <image src='../../../images/cardstyle/information.png'></image>
+          <text>{{cardInfo.email}}</text>
+          <image src='../../../images/cardstyle/website.png'></image>
+          <text>{{cardInfo.url}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

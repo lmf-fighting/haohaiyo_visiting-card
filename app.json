@@ -1,0 +1,22 @@
+{
+  "cloud": true,
+  "pages": [
+    "pages/empower/empower",
+    "pages/index/index",
+    "pages/shareinfo/shareinfo",
+    "pages/cardstyle/choicestyle/choicestyle",
+    
+    "pages/logs/logs",
+    "pages/cardclip/cardclip",
+    "pages/tip/tip",
+    "pages/editorcreatecard/editorcreatecard",
+    "pages/sharecode/sharecode"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

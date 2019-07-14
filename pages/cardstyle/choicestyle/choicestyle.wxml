@@ -1,0 +1,6 @@
+<view bindtap='choiceStyle' data-style="1">
+  <card1 cardInfo="{{cardInfo}}"></card1>
+</view>
+<view bindtap='choiceStyle' data-style="2">
+  <card2 cardInfo="{{cardInfo}}"></card2>
+</view>

@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0?'active1':''}}" data-current="0" bindtap="clickTab">我的收藏</view>
+    <view class="swiper-tab-item {{currentTab==1?'active2':''}}" data-current="1" bindtap="clickTab">谁看过我</view>
+
+  </view>
+  <view class="content">
+    <!-- tab1 -->
+    <view class="{{currentTab == 0 ? 'show':'hidden'}} ">
+      <scroll-view class="table ">
+          <view class="tr " wx:for="{{collection}}" bindtap="toCollectionPage" data-cid="{{item.cardId}}">
+            <view class="td">
+              <image src="{{item.headicon}}"></image>
+            </view>
+            <view class="td">
+              <view class="name">
+                <text>{{item.name}}</text>
+              </view>
+              <view class="date">{{item.date}} 我收藏了TA的名片</view>
+            </view>
+          </view>
+          <text wx:if="{{collection.length<=0}}" class="none">没有收藏记录</text>
+      </scroll-view>
+      </view>
+      <!-- tab2 -->
+      <view class="{{currentTab == 1 ? 'show':'hidden'}}">
+        <scroll-view class="table">
+          <view class="tr" wx:for="{{visit}}" bindtap="toCollectionPage" data-cid="{{item.cardId}}">
+            <view class="td">
+              <image src="{{item.headicon}}"></image>
+            </view>
+            <view class="td">
+              <view class="name">
+                <view>
+                  <text>{{item.name}}</text> </view>
+              </view>
+              <view class="date">{{item.date}} TA访问过我</view>
+            </view>
+          </view>
+          <text wx:if="{{visit==null}}" class="none">没有访问记录</text>
+        </scroll-view>
+      </view>
+    </view>
+  </view>

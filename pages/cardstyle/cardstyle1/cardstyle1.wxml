@@ -1,0 +1,21 @@
+<view class='set'>
+  <view class='card'>
+    <view class='bg'>
+      <image src='../../../images/editorcreatecard/bj-1.png'></image>
+    </view>
+    <view class='content'>
+      <view class='ct-head'>
+        <text class='ct-text1'>{{cardInfo.name}}</text>
+        <text class='ct-text2'>{{cardInfo.jobInfo}}</text>
+        <image src='{{cardInfo.headicon}}'></image>
+      </view>
+      <view class='ct-foot'>
+        <text class='ct-foot-text1' >{{cardInfo.company}}</text>
+        <text class='ct-foot-text2'>地址：{{cardInfo.address}}</text>
+        <text class='ct-foot-text2'>手机：{{cardInfo.mobilephone}}</text>
+        <text class='ct-foot-text2'>邮箱：{{cardInfo.email}}</text>
+        <text class='ct-foot-text2'>官网：{{cardInfo.url}}</text>
+      </view>
+    </view>
+  </view>
+</view>

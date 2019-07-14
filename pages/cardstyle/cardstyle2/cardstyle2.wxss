@@ -1,0 +1,77 @@
+.set{
+height: 100%;
+width: 700rpx;
+margin: 0 auto;
+}
+.card2 .bg image{
+  height: 415rpx;
+  width: 712rpx; 
+}
+.card2 .content{
+
+  color: #E7CD9A;
+  height: 400rpx;
+  width: 680rpx; 
+  padding-left:  50rpx;
+  margin: 0 19rpx;
+  border: 1px solid rgba(0, 0, 0, 0);
+  position: absolute;
+  margin-top: -400rpx;
+}
+.card2 .content .ct-head{
+  height: 102rpx;
+  width: 100%;
+  margin-top: 54rpx;
+  margin-bottom: 34rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.card2 .content image{
+height: 102rpx;
+width: 102rpx;
+position: absolute;
+border-radius: 50%;
+}
+
+.card2 .content .ct-text1{
+margin-left: 138rpx;
+font-size: 44rpx;
+font-weight: Medium;
+font-family: SourceHanSansCN-Medium;
+}
+
+.card2 .content .ct-text2{
+margin-left: 138rpx;
+font-size: 24rpx;
+font-weight: Regular;
+font-family: SourceHanSansCN-Regular;
+}
+
+.card2 .content .ct-foot{
+display: block;
+}
+
+.card2 .content .ct-foot-text1{ 
+margin-top: -31rpx;
+margin-left: 350rpx;
+margin-bottom: 58rpx;
+font-size: 24rpx;
+font-weight: Medium;
+font-family: SourceHanSansCN-Medium;
+display: block;
+}
+
+.card2 .content .ct-foot-text2 text{
+margin-left: 174rpx;
+font-size: 24rpx;
+font-weight: Regular;
+font-family: SourceHanSansCN-Regular;
+display: block;
+}
+.card2 .content .ct-foot image{
+margin-left: 138rpx;
+margin-top: 5rpx;
+height: 22rpx;
+width: 18rpx;
+}

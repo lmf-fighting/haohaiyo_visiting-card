@@ -1,0 +1,64 @@
+.set{
+height: 100%;
+width: 700rpx;
+margin: 0 auto;
+} 
+.card .bg image{
+  height: 415rpx;
+  width: 712rpx; 
+  
+}
+
+.card .content{
+color: white;
+height: 400rpx;
+width: 588rpx; 
+margin: 0 56rpx;
+border: 1px solid rgba(0, 0, 0, 0);
+position: absolute;
+margin-top: -400rpx;
+}
+
+.card .content .ct-head{
+height: 102rpx;
+width: 100%;
+margin-top: 44rpx;
+margin-bottom: 34rpx;
+}
+
+.card .content image{
+height: 102rpx;
+width: 102rpx;
+float: right;
+border-radius: 50%;
+}
+
+.card .content .ct-text1{
+font-size: 44rpx;
+font-weight: Medium;
+font-family: SourceHanSansCN-Medium;
+}
+
+.card .content .ct-text2{
+margin-left: 30rpx;
+font-size: 24rpx;
+font-weight: Regular;
+font-family: SourceHanSansCN-Regular;
+}
+
+.card .content .ct-foot{
+display: flex;
+flex-direction: column;
+}
+
+.card .content .ct-foot-text1{
+font-size: 30rpx;
+font-weight: Medium;
+font-family: SourceHanSansCN-Medium;
+margin-bottom: 6rpx;
+}
+.card .content .ct-foot-text2{
+font-size: 24rpx;
+font-weight: Regular;
+font-family: SourceHanSansCN-Regular;
+}
