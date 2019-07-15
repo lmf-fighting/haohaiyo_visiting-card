@@ -87,7 +87,7 @@ Page({
             },
             success: function() {
               app.globalData.cardInfo.cardType = parseInt(num)
-              wx.redirectTo({
+              wx.reLaunch({
                 url: '/pages/index/index',
               })
             },

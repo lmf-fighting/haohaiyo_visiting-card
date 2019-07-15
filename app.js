@@ -7,7 +7,7 @@ App({
       traceUser: true
     })
     //通过云函数获取openid
-    this.getOpenId();
+    // this.getOpenId();
 
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -22,11 +22,10 @@ App({
   },
   getOpenId: function () {
     var that = this;
-    wx.cloud.callFunction({
-      name: 'getOpenId',
-      complete: res => {
-        that.globalData.openId = res.result.event.userInfo.openId
-      }
+    return wx.cloud.callFunction({
+      name: 'getOpenId'
+    }).then(res=>{
+      that.globalData.openId = res.result.event.userInfo.openId
     })
   },
 })

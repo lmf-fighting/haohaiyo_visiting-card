@@ -10,6 +10,7 @@ Page({
    */
   data: {
     cardInfo: null,
+    userInfo:null
   },
 
   /**
@@ -64,7 +65,7 @@ Page({
     var that = this;
     const ctx = wx.createCanvasContext('myCanvas');
     var imgPath = '/images/sharecode/bg_code.png';
-    var imgUserPath = that.data.cardInfo.headicon
+    var imgUserPath = that.data.userInfo.avatarUrl;
     var code = "data:image/png;base64," + QRcode;
     //绘制图像到画布 x y width height
     ctx.drawImage(imgPath, 0, 0, (that.data.deviceWidth / 750) * 600, (that.data.deviceHeight / 1334) * 500);
@@ -79,11 +80,11 @@ Page({
     ctx.setFontSize((that.data.deviceWidth / 750) * 32)
     ctx.setFillStyle('#333333')
     //文案 x y
-    ctx.fillText(that.data.cardInfo.name, (that.data.deviceWidth / 750) * 140, (that.data.deviceHeight / 1334) * 590)
+    ctx.fillText(that.data.cardInfo.name, (that.data.deviceWidth / 750) * 160, (that.data.deviceHeight / 1334) * 590)
 
     ctx.setFontSize((that.data.deviceWidth / 750) * 24)
     ctx.setFillStyle('#666666')
-    ctx.fillText(that.data.cardInfo.jobInfo, (that.data.deviceWidth / 750) * 140, (that.data.deviceHeight / 1334) * 630)
+    ctx.fillText(that.data.cardInfo.jobInfo, (that.data.deviceWidth / 750) * 160, (that.data.deviceHeight / 1334) * 630)
 
     ctx.setFontSize((that.data.deviceWidth / 750) * 25)
     ctx.setFillStyle('#999999')
@@ -129,7 +130,7 @@ Page({
                 success: function (res) {
                   if (res.confirm) {
                     console.log('用户点击确定');
-                    wx.redirectTo({
+                    wx.reLaunch({
                       url: '/pages/index/index',
                     })
                   }else{
@@ -149,9 +150,9 @@ Page({
                 time: 4000,
                 icon: 'none'
               })
-              wx.redirectTo({
-                url: '/pages/sharecode/sharecode',
-              })
+              // wx.redirectTo({
+              //   url: '/pages/sharecode/sharecode',
+              // })
 
             }
           });
@@ -178,54 +179,4 @@ Page({
       },
     })
   },
-
-  
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

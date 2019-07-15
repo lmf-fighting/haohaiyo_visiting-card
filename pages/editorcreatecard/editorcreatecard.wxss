@@ -20,7 +20,7 @@
 .set .card .content{
   color: white;
   height: 400rpx;
-  width: 588rpx; 
+  width: 588rpx;
   margin: 0 81rpx;
   border: 1px solid rgba(0, 0, 0, 0);
   position: absolute;
@@ -119,6 +119,8 @@
   font-weight: Regular;
 }
 
+
+
 .set .information input {
   margin-left: 40rpx;
   margin-top: 40rpx;
@@ -139,6 +141,14 @@
   /* border: 1px solid black; */
 }
 
+.redInput{
+  color: red; 
+}
+.set .information .redStars{
+  color: red;
+  position: absolute;
+  margin: 45rpx 0 0 11rpx;
+}
 .set .bt button{
  height: 88rpx;
   width: 400rpx;

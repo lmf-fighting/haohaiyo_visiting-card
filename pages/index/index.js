@@ -52,7 +52,6 @@ Page({
   },
   //去编辑名片页面
   toEditCard: function () {
-
     wx.navigateTo({
       url: '/pages/editorcreatecard/editorcreatecard',
     })
@@ -92,6 +91,15 @@ Page({
         console.log(res)
       }
     }
-  }
+  },
 
+  //去设置页面
+  toSetUpPage:function(e){
+    var cid=e.currentTarget.dataset.cid;
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/selfcenter/selfcenter?cid='+cid,
+    })
+  }
+  
 })

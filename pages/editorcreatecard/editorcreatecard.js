@@ -7,7 +7,13 @@ Page({
    */
   data: {
     cardInfo:null,
-    headicon: '/images/editorcreatecard/tx.png'//默认
+    headicon: '/images/editorcreatecard/tx.png',//默认
+    cardType:1,//默认
+    nameClass:null,
+    mobilephoneClass:null,
+    mobilephoneStyle:null,
+    phoneFocus:false,
+    nameFocus:false
   },
 
   /**
@@ -16,57 +22,6 @@ Page({
   onLoad: function (options) {
     //得到用户信息
     this.getCardInfo();
-
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
   getCardInfo:function(){
     var that=this;
@@ -76,9 +31,8 @@ Page({
     }).get({
       success: function (res) {
         if(res.data.length>0){
-          that.setData({ cardInfo: res.data[0],headicon:res.data[0].headicon})
+          that.setData({ cardInfo: res.data[0], headicon: res.data[0].headicon, cardType: res.data[0].cardType})
         }
-        
       }
     })
   },
@@ -133,13 +87,73 @@ Page({
   },
   formSubmit: function (e) {
     var that = this;
+    console.log(e)
     var data = e.detail.value;
-    if (that.data.cardInfo==null||that.data.headicon != that.data.cardInfo.headicon){
-      that.doUpload().then(res=>{
-        that.setFormData(data);
-      });
+    var name = data.name;
+    var mobilephone =data.mobilephone;
+    console.log(name)
+    console.log(mobilephone)
+    if(name!=""){
+        if(mobilephone!=""){
+          if ((/^1[34578]\d{9}$/.test(mobilephone))){
+            if (that.data.cardInfo == null || that.data.headicon != that.data.cardInfo.headicon) {
+              that.doUpload().then(res => {
+                that.setFormData(data);
+              });
+            } else {
+              this.setFormData(data);
+            }
+          }else{
+            
+            wx.vibrateLong({
+              success: function (res) {
+                wx.showToast({
+                  title: '手机号不合法！',
+                  icon: 'none'
+                })
+              },
+              fail: function (res) {
+              }
+            })
+            this.setData({
+              mobilephoneStyle: "red",
+              phoneFocus: true
+            })
+          }          
+        }else{
+          wx.vibrateLong({
+            success: function (res) {
+              wx.showToast({
+                title: '请填写手机号！',
+                icon: 'none'
+              })
+            },
+            fail: function (res) {
+            }
+          })
+          
+          this.setData({
+            mobilephoneClass: "redInput",
+            phoneFocus: true
+          })
+        }
     }else{
-      this.setFormData(data);
+      wx.vibrateLong({
+
+        success: function (res) {
+          wx.showToast({
+            title: '请填写姓名！',
+            icon: 'none'
+          })
+        },
+        fail: function (res) {
+        }
+      })
+     
+      this.setData({
+        nameClass: "redInput",
+        //nameFocus:true
+      })
     }
   },
   setFormData:function(data){
@@ -179,7 +193,7 @@ Page({
           icon: 'none'
         })
         app.globalData.cardInfo = tempCardInfo;
-        wx.redirectTo({
+        wx.reLaunch({
           url: '/pages/index/index'
         })
       },
@@ -203,7 +217,7 @@ Page({
           icon: 'none'
         })
         app.globalData.cardInfo = tempCardInfo;
-        wx.redirectTo({
+        wx.reLaunch({
           url: '/pages/index/index'
         })
       },
@@ -216,5 +230,65 @@ Page({
       }
     })
    
-  }
+  },
+  nameFocus: function (e) {
+    this.setData({
+      nameClass: null      
+    })
+  },
+  nameBlur: function (e) {
+    if(e.detail.value==""){
+      this.setData({
+        nameClass: "redInput"
+      })
+    }
+  },
+  nameInput:function(e){
+    console.log(e)
+    this.setData({["cardInfo.name"]:e.detail.value})
+  },
+  mobilePhoneFocus: function (e) {
+    this.setData({
+      mobilephoneClass: null,
+    })
+  },
+  mobilePhoneBlur: function (e) {
+    if (e.detail.value == "") {
+      this.setData({
+        mobilephoneClass: "redInput"
+      })
+    }
+  },
+   mobilePhoneInput:function(e){
+    
+     this.setData({
+       mobilephoneStyle: null,
+       ["cardInfo.mobilephone"]: e.detail.value
+     })
+   },
+   companyInput:function(e){
+     this.setData({
+       ["cardInfo.company"]: e.detail.value
+     })
+   },
+   jobInfoInput:function(e){
+     this.setData({
+       ["cardInfo.jobInfo"]: e.detail.value
+     })
+   },
+   addressInput:function(e){
+     this.setData({
+       ["cardInfo.address"]: e.detail.value
+     })
+   },
+   urlInput:function(e){
+     this.setData({
+       ["cardInfo.url"]: e.detail.value
+     })
+   },
+   emailInput:function(e){
+     this.setData({
+       ["cardInfo.email"]: e.detail.value
+     })
+   }
 })

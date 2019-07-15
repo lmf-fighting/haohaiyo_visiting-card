@@ -20,13 +20,12 @@ Page({
   onLoad: function(options) {
     var cid = options.shareUid;
     //cid ="9afd9b6a5d29989f068a7cc030a7470c";
+    //cid ="f1006ad85d29ae14069bda753117abb9";
     var that = this;
     this.setData({
       openId: app.globalData.openId
     })
-
     that.getShareData(cid);
-
   },
   getShareData: function(cid) {
     const db = wx.cloud.database()
@@ -117,7 +116,7 @@ Page({
     db.collection('visit').add({
       data: {
         name: that.data.selfData.name,
-        date: util.formatDate(new Date()),
+        date: util.formatTime(new Date()),
         headicon: that.data.selfData.headicon,
         visitedId: that.data.cardInfo._openid,
         cardId: that.data.selfData._id
@@ -211,7 +210,7 @@ Page({
     var that = this;
     const db = wx.cloud.database()
     var obj = that.getObject();
-    res.data[0].collections.push(obj)
+    res.data[0].collections.unshift(obj)
     db.collection('collection').doc(res.data[0]._id).update({
       data: {
         collections: res.data[0].collections

@@ -17,9 +17,8 @@ Page({
             success: function (res) {
               // 用户已经授权过,不需要显示授权页面,所以不需要改变 isHide 的值
               app.globalData.userInfo = res.userInfo;
-
               //选择跳转页面
-              that.choosePageTo()
+              that.choose()
             }
           });
         } else {
@@ -44,7 +43,7 @@ Page({
         isHide: false
       });
       //选择跳转页面
-      that.choosePageTo()
+      that.choose()
     } else {
       //用户按了拒绝按钮
       wx.showModal({
@@ -61,17 +60,30 @@ Page({
       });
     }
   },
+  choose:function(){
+    var that=this;
+    if (app.globalData.openId==null){
+      app.getOpenId().then(res => {
+        if (app.globalData.openId != null){
+          that.choosePageTo()
+        }else{
+          that.choose();
+        }  
+      });
+    }else{
+      that.choosePageTo()
+    }
+  },
   choosePageTo:function(){
     const db = wx.cloud.database()
     db.collection('cardInfo').where({
       _openid: app.globalData.openId
     }).get({
       success: function (res) {
-        var str='';
+        var str = '';
         if (res.data.length > 0) {//进入个人主页
           app.globalData.cardInfo = res.data[0];
           str = '/pages/index/index';
-          //str='/pages/shareinfo/shareinfo'
         } else {//进入提示页
           str = '/pages/tip/tip';
         }
@@ -81,7 +93,4 @@ Page({
       }
     })
   }
-
-
-
 })

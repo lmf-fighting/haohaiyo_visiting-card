@@ -1,28 +1,34 @@
 <view class='set'>
-  <view class='card2'>
-    <view class='bg'>
-      <image src='../../../images/cardstyle/bj-2.png'></image>
+  <view class='card2' style='background-image: url("https://6465-dev-7f01e-1259628828.tcb.qcloud.la/bj-2.png")'>
+  <view class='label' wx:if="{{cardInfo.cardType==2&&isChoiceStylePage}}">
+      <view class='text'>当前样式</view>
     </view>
-    <view class='content'>
-      <view class='ct-head'>
-        <text class='ct-text1'>{{cardInfo.name}}</text>
-        <text class='ct-text2'>{{cardInfo.jobInfo}}</text>
-        <text class='ct-foot-text1'>{{cardInfo.address}}</text>
-        <image src='{{cardInfo.headicon}}'></image>
+    <view class='ct-head'>
+      <image src='{{cardInfo.headicon}}'></image>
+      <view>
+      <text class='ct-text1'>{{cardInfo.name}}</text>
+      <text class='ct-text2'>{{cardInfo.jobInfo}}</text>
       </view>
-      <view class='ct-foot'>
+      <text class='ct-text3'>{{cardInfo.company}}</text>
 
-        <view class='ct-foot-text2'>
-          <image src='../../../images/cardstyle/address.png'></image>
-          <text>{{cardInfo.address}}</text>
-          <image src='../../../images/cardstyle/photo-num.png'></image>
-          <text>{{cardInfo.mobilephone}}</text>
-          <image src='../../../images/cardstyle/information.png'></image>
-          <text>{{cardInfo.email}}</text>
-          <image src='../../../images/cardstyle/website.png'></image>
-          <text>{{cardInfo.url}}</text>
-        </view>
+    </view>
+    <view class='ct-foot'>
+      <view>
+        <image src='/images/cardstyle/address.png'></image>
+        <text>{{cardInfo.address}}</text>
       </view>
+      <view>
+        <image src='/images/cardstyle/photo-num.png'></image>
+        <text>{{cardInfo.mobilephone}}</text>
+        </view>
+        <view>
+        <image src='/images/cardstyle/information.png'></image>
+        <text>{{cardInfo.email}}</text>
+        </view>
+        <view>
+        <image src='/images/cardstyle/website.png'></image>
+        <text>{{cardInfo.url}}</text>
+        </view>
     </view>
   </view>
 </view>

@@ -52,6 +52,12 @@ canvas{
   font-family:SourceHanSansCN-Medium;
   font-weight:500rpx;
   color:rgba(51,51,51,1);
+  display: inline-block;
+  width: 450rpx;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .item-body-identity{
   margin-top: 24rpx;

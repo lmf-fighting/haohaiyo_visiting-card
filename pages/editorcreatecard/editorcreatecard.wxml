@@ -1,35 +1,21 @@
 <!--pages/editcard/editcard.wxml-->
 <view class='set'>
   <view class='card'>
-    <view class='bg'> 
-      <image src='/images/editorcreatecard/bj-1.png'></image>
+    <view wx:if="{{cardType==1}}">
+      <card1 cardInfo="{{cardInfo}}" isChoiceStylePage="{{true}}"></card1>
     </view>
-    <view class='content'>
-      <view class='ct-head'>
-        <text class='ct-text1' wx:if="{{cardInfo!=null&&cardInfo.name!=''}}">{{cardInfo.name}}</text>
-        <text class='ct-text1' wx:else>姓名</text>
-        <text class='ct-text2' wx:if="{{cardInfo!=null&&cardInfo.jobInfo!=''}}">{{cardInfo.jobtype}}</text>
-        <text class='ct-text2' wx:else>未填写职位</text>
-        <image bindtap="uploadHeadicon" src='{{headicon}}'></image>
-      </view>
-    <view class='ct-foot'>
-      <text class='ct-foot-text1' wx:if="{{cardInfo!=null&&cardInfo.company!=''}}">{{cardInfo.company}}</text>
-      <text class='ct-foot-text1' wx:else>未填写公司</text>
-
-      <text class='ct-foot-text2' wx:if="{{cardInfo!=null&&cardInfo.url!=''}}">{{cardInfo.url}}</text>
-      <text class='ct-foot-text2' wx:else>未填写公司官网</text>
-
-      <text class='ct-foot-text2' wx:if="{{cardInfo!=null&&cardInfo.address!=''}}">{{cardInfo.address}}</text>
-      <text class='ct-foot-text2' wx:else>未填写办公地点</text>
-
-      <text class='ct-foot-text2' wx:if="{{cardInfo!=null&&cardInfo.mobilephone!=''}}">{{cardInfo.mobilephone}}</text>
-      <text class='ct-foot-text2' wx:else>未填写手机号</text>
-
-      <text class='ct-foot-text2' wx:if="{{cardInfo!=null&&cardInfo.email!=''}}">{{cardInfo.email}}</text>
-      <text class='ct-foot-text2' wx:else>未填写邮箱</text>
+    <view wx:elif="{{cardType==2}}">
+      <card2 cardInfo="{{cardInfo}}" isChoiceStylePage="{{true}}"></card2>
     </view>
+    <view wx:elif="{{cardInfo.cardType==3}}">
+      <card3 cardInfo="{{cardInfo}}" isChoiceStylePage="{{true}}"></card3>
     </view>
-    
+    <view wx:elif="{{cardInfo.cardType==4}}">
+      <card4 cardInfo="{{cardInfo}}" isChoiceStylePage="{{true}}"></card4>
+    </view>
+    <view wx:else>
+      <card5 cardInfo="{{cardInfo}}" isChoiceStylePage="{{true}}"></card5>
+    </view>
   </view>
   <view class='text'>
     <text class='text1'>您的资料</text>
@@ -39,23 +25,25 @@
     <form bindsubmit="formSubmit">
       <view>
         <text decode="{{true}}">姓&emsp;&emsp;名</text>
-        <input name="name" type='text' placeholder="请填写您的真实姓名" value="{{cardInfo.name}}"></input>
+        <text class="redStars">*</text>
+        <input bindinput="nameInput" focus="{{nameFocus}}" placeholder-class="{{nameClass}}" name="name" type='text' placeholder="请填写您的真实姓名" value="{{cardInfo.name}}" bindfocus="nameFocus" bindblur='nameBlur'></input>
       </view>
       <view>
-        <text decode="{{true}}">手&emsp;&emsp;机</text>
-        <input name="mobilephone" type='text' placeholder="请填写您的手机" value="{{cardInfo.mobilephone}}"></input>
-      </view>   
+        <text decode="{{true}}">手&emsp;&emsp;机<text class="redStars">*</text></text>
+        <input focus="{{phoneFocus}}" bindinput="mobilePhoneInput" style='color:{{mobilephoneStyle}};' placeholder-class="{{mobilephoneClass}}" name="mobilephone" type='number' placeholder="请填写您的手机" value="{{cardInfo.mobilephone}}" bindfocus="mobilePhoneFocus"
+          bindblur='mobilePhoneBlur'></input>
+      </view>
       <view>
         <text decode="{{true}}">职&emsp;&emsp;位</text>
-        <input name="jobInfo" type='text' placeholder="请填写您的职位信息" value="{{cardInfo.jobInfo}}"></input>
+        <input bindinput="jobInfoInput" name="jobInfo" type='text' placeholder="请填写您的职位信息" value="{{cardInfo.jobInfo}}"></input>
       </view>
       <view>
         <text>单位名称</text>
-        <input name="company" type='text'placeholder="请填写您的单位名称" value="{{cardInfo.company}}"></input>
+        <input bindinput="companyInput" name="company" type='text' placeholder="请填写您的单位名称" value="{{cardInfo.company}}"></input>
       </view>
       <view>
         <text>办公地点</text>
-        <input name="address" type='text' placeholder="请输入您的公司地址" value="{{cardInfo.address}}"></input>
+        <input bindinput="addressInput" name="address" type='text' placeholder="请输入您的公司地址" value="{{cardInfo.address}}"></input>
       </view>
       <view>
         <text>主要业务</text>
@@ -67,20 +55,20 @@
       </view>
       <view>
         <text decode="{{true}}">官&emsp;&emsp;网</text>
-        <input name="url" type='text' placeholder="请填写公司官网" value="{{cardInfo.url}}"></input>
+        <input bindinput="urlInput" name="url" type='text' placeholder="请填写公司官网" value="{{cardInfo.url}}"></input>
       </view>
       <view>
         <text decode="{{true}}">邮&emsp;&emsp;箱</text>
-        <input name="email" type='text' placeholder="请填写您的电子邮箱" value="{{cardInfo.email}}"></input>
+        <input bindinput="emailInput" name="email" type='text' placeholder="请填写您的电子邮箱" value="{{cardInfo.email}}"></input>
       </view>
       <view>
         <text decode="{{true}}">微&emsp;&emsp;信</text>
         <input name="weixin" type='text' placeholder="请填写您的微信号" value="{{cardInfo.weixin}}"></input>
-      </view>  
+      </view>
       <view class='bt'>
         <button form-type="submit">保存</button>
-      </view>    
-    </form> 
+      </view>
+    </form>
   </view>
-  
+
 </view>

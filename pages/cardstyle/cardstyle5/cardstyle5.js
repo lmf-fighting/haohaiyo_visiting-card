@@ -1,4 +1,4 @@
-// pages/cardstyle/cardstyle1/cardstyle1.js
+// pages/cardstyle/cardstyle5/cardstyle5.js
 Component({
   /**
    * 组件的属性列表
