@@ -21,6 +21,7 @@ Page({
     var cid = options.shareUid;
     //cid ="9afd9b6a5d29989f068a7cc030a7470c";
     //cid ="f1006ad85d29ae14069bda753117abb9";
+    //cid ="f1006ad85d2a903e070273cc678a26c2";
     var that = this;
     this.setData({
       openId: app.globalData.openId

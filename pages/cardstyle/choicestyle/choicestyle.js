@@ -14,9 +14,8 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      cardInfo: app.globalData.cardInfo
+      cardInfo: app.globalData.cardInfo,
     })
-
   },
 
   /**
@@ -68,7 +67,7 @@ Page({
 
   },
   choiceStyle: function(e) {
-
+    var that=this;
     wx.showModal({
       title: '提示',
       content: '是否选择该样式',
@@ -76,7 +75,6 @@ Page({
         if (res.confirm) {
           console.log('用户点击确定')
           const db = wx.cloud.database()
-          var that = this;
           console.log("选择样式")
           var num = e.currentTarget.dataset.style
           db.collection('cardInfo').doc(app.globalData.cardInfo._id).update({

@@ -18,7 +18,8 @@ App({
   globalData: {
     cardInfo: null,
     userInfo: null,
-    openId: null
+    openId: null,
+    saveAddressPageData:null
   },
   getOpenId: function () {
     var that = this;

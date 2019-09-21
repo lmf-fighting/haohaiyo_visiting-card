@@ -13,15 +13,26 @@ Page({
     mobilephoneClass:null,
     mobilephoneStyle:null,
     phoneFocus:false,
-    nameFocus:false
+    nameFocus:false,
+    saveCardInfo:null,
+    address:null,
+    privacy:false//默认
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //得到用户信息
-    this.getCardInfo();
+    // var addressData=options.address;
+    // this.setData({ address: addressData})
+    if (app.globalData.saveAddressPageData!=null){
+      this.setData({ cardInfo: app.globalData.saveAddressPageData })
+    }else{
+      //得到用户信息
+      this.getCardInfo();
+    }
+    
+    
   },
   getCardInfo:function(){
     var that=this;
@@ -31,31 +42,20 @@ Page({
     }).get({
       success: function (res) {
         if(res.data.length>0){
-          that.setData({ cardInfo: res.data[0], headicon: res.data[0].headicon, cardType: res.data[0].cardType})
+          // if(that.data.address!=null){
+          //   res.data[0].address=that.data.address;
+          // }
+          that.setData({ cardInfo: res.data[0], headicon: res.data[0].headicon, cardType: res.data[0].cardType, saveCardInfo: res.data[0], privacy: res.data[0].privacy})
+
         }
       }
     })
   },
-  uploadHeadicon:function(){
-    console.log("上传头像")
-    this.doChooseImage();
-  },
-  //选择图片
-  doChooseImage: function () {
-    var that = this;
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        var path = res.tempFilePaths[0];
-        that.setData({ headicon:path})
-      },
-      fail: e => {
-        console.error(e)
-      }
-    })
+  setHeadiconData:function(e){
+    console.log("setHeadiconData")
+    console.log(e.detail)
+    // console.log(e.detail.path)
+    this.setData({ headicon: e.detail })
   },
   //上传图片
   doUpload: function () {
@@ -88,20 +88,21 @@ Page({
   formSubmit: function (e) {
     var that = this;
     console.log(e)
-    var data = e.detail.value;
-    var name = data.name;
-    var mobilephone =data.mobilephone;
+    var tempData = e.detail.value;
+    var name = tempData.name;
+    var mobilephone = tempData.mobilephone;
     console.log(name)
     console.log(mobilephone)
     if(name!=""){
         if(mobilephone!=""){
           if ((/^1[34578]\d{9}$/.test(mobilephone))){
-            if (that.data.cardInfo == null || that.data.headicon != that.data.cardInfo.headicon) {
+            if (that.data.cardInfo == null || that.data.headicon != that.data.cardInfo.headicon)
+             {
               that.doUpload().then(res => {
-                that.setFormData(data);
+                that.setFormData(tempData);
               });
             } else {
-              this.setFormData(data);
+              that.setFormData(tempData);
             }
           }else{
             
@@ -156,23 +157,24 @@ Page({
       })
     }
   },
-  setFormData:function(data){
+  setFormData: function (tempData){
     var that = this;
     var tempCardInfo = {
-      name: data.name,
-      jobInfo: data.jobInfo,
+      name: tempData.name,
+      jobInfo: tempData.jobInfo,
       headicon: that.data.headicon,//单独取
-      company: data.company,
-      address: data.address,
-      mobilephone: data.mobilephone,
-      email: data.email,
-      url: data.url,
-      weixin: data.weixin,
-      telephone: data.telephone,
-      business: data.business,
-      cardType: 1 //默认
+      company: tempData.company,
+      address: tempData.address,
+      mobilephone: tempData.mobilephone,
+      email: tempData.email,
+      url: tempData.url,
+      weixin: tempData.weixin,
+      telephone: tempData.telephone,
+      business: tempData.business,
+      cardType: 1, //默认
+      privacy: that.data.privacy
     }
-    if (that.data.cardInfo == null) {//创建    
+    if (that.data.cardInfo._id==null) {//创建    
       //添加操作
       that.addCard(tempCardInfo)
 
@@ -183,7 +185,7 @@ Page({
     }
   },
   //创建名片
-  addCard: function (tempCardInfo){
+  addCard: function (tempCardInfo) {
     const db = wx.cloud.database()
     db.collection('cardInfo').add({
       data: tempCardInfo,
@@ -193,6 +195,7 @@ Page({
           icon: 'none'
         })
         app.globalData.cardInfo = tempCardInfo;
+        app.globalData.saveAddressPageData = null
         wx.reLaunch({
           url: '/pages/index/index'
         })
@@ -217,6 +220,7 @@ Page({
           icon: 'none'
         })
         app.globalData.cardInfo = tempCardInfo;
+        app.globalData.saveAddressPageData=null
         wx.reLaunch({
           url: '/pages/index/index'
         })
@@ -276,11 +280,6 @@ Page({
        ["cardInfo.jobInfo"]: e.detail.value
      })
    },
-   addressInput:function(e){
-     this.setData({
-       ["cardInfo.address"]: e.detail.value
-     })
-   },
    urlInput:function(e){
      this.setData({
        ["cardInfo.url"]: e.detail.value
@@ -290,5 +289,41 @@ Page({
      this.setData({
        ["cardInfo.email"]: e.detail.value
      })
-   }
+   },
+  businessInput: function (e) {
+    this.setData({
+      ["cardInfo.business"]: e.detail.value
+    })
+  },
+  telephoneInput: function (e) {
+    this.setData({
+      ["cardInfo.telephone"]: e.detail.value
+    })
+  },
+  weixinInput: function (e) {
+    this.setData({
+      ["cardInfo.weixin"]: e.detail.value
+    })
+  },
+  toGetAddressPage:function(){
+    app.globalData.saveAddressPageData=this.data.cardInfo
+    wx.navigateTo({
+      url: '/pages/address/address',
+    })
+
+  },
+  onUnload: function () {
+
+    console.log('销毁页面');
+    app.globalData.saveAddressPageData =null
+   
+  },
+  onShow: function () {
+    console.log("onShow....")
+    if (app.globalData.saveAddressPageData!=null){
+      this.setData({ ["cardInfo.address"]: app.globalData.saveAddressPageData.address })
+    }
+    
+  },
+  
 })

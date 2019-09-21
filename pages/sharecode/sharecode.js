@@ -1,7 +1,8 @@
 // pages/index2/index2.js
 const app = getApp();
-var QRcode='';
-var shareImgUrl='';
+var QRcode = '';
+var imgUserPath = '';
+var filePath = "";
 Page({
  
 
@@ -28,7 +29,7 @@ Page({
     // 生成页面的二维码
     wx.request({
       //注意：下面的access_token值可以不可以直接复制使用，需要自己请求获取
-      url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=23_9jEQlIg6hwWtZMmOYVPnahxubRVkf6vfzbStpuaPq67RFTf5dA36rrdE5YHhx-KCi_94E3OKQqkFKpvKC28nXaj5COayLqStqrnrkqHBS-Ff91BBFlWF8rHzRqt2DGpj7Qdp-GLEKzgELKUaDIYiAEAVAQ',
+      url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=23_E_x8rDW9ijlx_igog25kEsQwSC37CFoaw-82NbYtR7jn6Bl6WVUBtHB6ns7sLe0pKsxebkhlOzRedBLJ0NE4I3VCpMF6xBgPPE_JfLV0iAMOJi5X-D_ax_zk5NzWH_wLn7q1sWqEYiZ6VltLZBXeAGAOQM',
       data: {
         scene: '000',
         page: ""  //这里按照需求设置值和参数   
@@ -41,6 +42,34 @@ Page({
         that.setData({
           QRcode:QRcode
         })
+      },
+      fail(e) {
+        console.log(e)
+      }
+    });
+
+    //获取云端图片的下载地址
+    wx.request({
+      //注意：下面的access_token值可以不可以直接复制使用，需要自己请求获取
+      url: 'https://api.weixin.qq.com/tcb/batchdownloadfile?access_token=23_E_x8rDW9ijlx_igog25kEsQwSC37CFoaw-82NbYtR7jn6Bl6WVUBtHB6ns7sLe0pKsxebkhlOzRedBLJ0NE4I3VCpMF6xBgPPE_JfLV0iAMOJi5X-D_ax_zk5NzWH_wLn7q1sWqEYiZ6VltLZBXeAGAOQM',
+      data: {
+        "env": "dev-7f01e",
+        "file_list": [
+          {
+            "fileid": app.globalData.cardInfo.headicon,
+            "max_age": 7200
+          }
+        ]
+      },
+      method: "POST",
+      success(res) {
+
+        console.log(res.data.file_list[0])
+        imgUserPath = res.data.file_list[0].download_url;
+
+        // that.setData({
+        //   QRcode: QRcode
+        // })
       },
       fail(e) {
         console.log(e)
@@ -101,82 +130,137 @@ Page({
    
   
   },
-   //保存图片 
-  save(){
-    
+  save() {
+    var that = this;
     //需要把canvas转成图片后才能保存
     setTimeout(() => {
-    //获取临时路径
-    wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: 634,
-      height: 1960,
-      destWidth: 1268,  //2倍关系
-      destHeight: 1960, //2倍关系
-      canvasId: 'myCanvas',
-      success: function (res) {
-         //保存本地相册 
-          wx.saveImageToPhotosAlbum({
-            //shareImgSrc为canvas赋值的图片路径
-            filePath: res.tempFilePath,
-            success(res) {
+      //获取临时路径
+      wx.canvasToTempFilePath({
+        x: 0,
+        y: 0,
+        width: 634,
+        height: 1960,
+        destWidth: 1268,  //2倍关系
+        destHeight: 1960, //2倍关系
+        canvasId: 'myCanvas',
+        success: function (res) {
+          // filePath = res.tempFilePath;
+          //授权
+          that.saveImageToPhotos(res.tempFilePath);
+
+        },
+        fail: function (res) {
+          console.log(res)
+        }
+      });
+    }, 300);
+  },
+  // 点击保存图片到相册(授权)
+  saveImageToPhotos(filePath) {
+
+    var self = this;
+    // 相册授权
+    wx.getSetting({
+      success(res) {
+
+        // 进行授权检测，未授权则进行弹层授权
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success() {
+              console.log(self);
+              self.saveImg(filePath);
+            },
+            // 拒绝授权时，则进入手机设置页面，可进行授权设置
+            fail() {
               wx.showModal({
-                title: '保存成功',
-                content: '图片成功保存到相册',
-                showCancel: false,
-                confirmText: '确认',
+                title: '您已拒绝授权',
+                content: '图片无法保存到相册',
+                cancelText: '取消',
+                confirmText: '去设置',
                 confirmColor: '#21e6c1',
                 success: function (res) {
                   if (res.confirm) {
-                    console.log('用户点击确定');
-                    wx.reLaunch({
-                      url: '/pages/index/index',
-                    })
-                  }else{
-
+                    console.log('用户点击去设置')
+                    wx.openSetting({
+                      success: function (data) {
+                        console.log("openSetting success");
+                      },
+                      fail: function (data) {
+                        console.log("openSetting fail");
+                      }
+                    });
+                  } else if (res.cancel) {
+                    console.log('用户点击取消')
                   }
-                },
-                fail: function (res) {
-                  console.log("--保存-fail----");
                 }
-
               });
-            },
-            fail: function (res) {
-              console.log("---fail----");
-              wx.showToast({
-                title: '已取消保存',
-                time: 4000,
-                icon: 'none'
-              })
-              // wx.redirectTo({
-              //   url: '/pages/sharecode/sharecode',
-              // })
-
             }
-          });
-        
+          })
+        } else {
+          console.log(self);
+          // 已授权则直接进行保存图片
+          self.saveImg(filePath);
+        }
+      },
+      fail(res) {
+        console.log(res);
+      }
+    })
+  },
+
+  //保存图片 
+  saveImg(filePath) {
+    wx.showLoading({
+      title: '加载中',
+    });
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 2000);
+    //保存本地相册 
+    wx.saveImageToPhotosAlbum({
+      //shareImgSrc为canvas赋值的图片路径
+      filePath: filePath,
+      success(res) {
+
+        wx.showToast({
+          title: '保存成功',
+          time: 4000,
+          icon: 'success'
+        })
+        wx.redirectTo({
+          url: '/pages/index/index',
+        });
       },
       fail: function (res) {
-        console.log(res)
+        console.log("---fail----");
+        wx.showToast({
+          title: '保存失败',
+          time: 4000,
+          icon: 'fail'
+        });
+        wx.redirectTo({
+          url: '/pages/sharecode/sharecode',
+        })
+
       }
     });
-    }, 300);
   },
-  codetap: function(){
+
+
+  codetap: function () {
     console.log("识别")
     wx.redirectTo({
       url: '/pages/index/index',
-      success: function(res) {
+      success: function (res) {
         console.log("识别成功·")
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log("识别失败")
       },
-      complete: function(res) {
+      complete: function (res) {
         console.log("识别完成")
       },
     })
-  },
+  }
 })

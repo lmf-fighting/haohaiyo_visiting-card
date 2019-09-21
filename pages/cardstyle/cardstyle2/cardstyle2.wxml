@@ -1,13 +1,14 @@
 <view class='set'>
   <view class='card2' style='background-image: url("https://6465-dev-7f01e-1259628828.tcb.qcloud.la/bj-2.png")'>
-  <view class='label' wx:if="{{cardInfo.cardType==2&&isChoiceStylePage}}">
+    <view class='label' wx:if="{{cardInfo.cardType==2&&isChoiceStylePage}}">
       <view class='text'>当前样式</view>
     </view>
     <view class='ct-head'>
-      <image src='{{cardInfo.headicon}}'></image>
+    <view ><image src='{{headicon}}' bindtap="uploadHeadicon"></image></view>
+      
       <view>
-      <text class='ct-text1'>{{cardInfo.name}}</text>
-      <text class='ct-text2'>{{cardInfo.jobInfo}}</text>
+        <text class='ct-text1'>{{cardInfo.name}}</text>
+        <text class='ct-text2'>{{cardInfo.jobInfo}}</text>
       </view>
       <text class='ct-text3'>{{cardInfo.company}}</text>
 
@@ -20,15 +21,15 @@
       <view>
         <image src='/images/cardstyle/photo-num.png'></image>
         <text>{{cardInfo.mobilephone}}</text>
-        </view>
-        <view>
+      </view>
+      <view>
         <image src='/images/cardstyle/information.png'></image>
         <text>{{cardInfo.email}}</text>
-        </view>
-        <view>
+      </view>
+      <view>
         <image src='/images/cardstyle/website.png'></image>
         <text>{{cardInfo.url}}</text>
-        </view>
+      </view>
     </view>
   </view>
 </view>

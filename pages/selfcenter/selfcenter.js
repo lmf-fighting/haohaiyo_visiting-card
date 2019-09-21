@@ -172,6 +172,12 @@ Page({
         })
       }
     })
-  }
+  },
+  toCollectionPage: function (data) {
+    var cid = data.currentTarget.dataset.cid;
+    wx.reLaunch({
+      url: '/pages/shareinfo/shareinfo?shareUid=' + cid
+    })
+  },
 
 })

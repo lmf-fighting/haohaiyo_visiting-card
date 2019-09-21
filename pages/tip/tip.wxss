@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   width: 750rpx;
-  height: 1346rpx;
+  height: 1200rpx;
+  /* border: 1rpx solid black; */
 }
 
 .item-text{
@@ -64,8 +65,13 @@
   font-weight: bold;
 }
 
-.item .item-foot image{
+
+.item .item-foot {
   margin-top: 137rpx;
+
+}
+
+.item .item-foot image{
   width: 750rpx;
   height: 66rpx;
 }

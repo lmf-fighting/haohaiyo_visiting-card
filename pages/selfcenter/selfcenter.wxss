@@ -178,21 +178,35 @@ page {
   margin-left: 10rpx;
 
 }
-.td image{
-  width: 100rpx;
-  height: 100rpx;
+.td image {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
 }
-.date{
-font-size:28rpx;
-font-family:SourceHanSansCN-Regular;
-font-weight:16rpx;
-color:rgba(153,153,153,1);
+
+.company text{
+  font-size: 36rpx;
+  font-family: SourceHanSansCN-Regular;
+  font-weight: 16rpx;
+  color: rgba(153, 153, 153, 1);
+  display: inline-block;
+  width: 510rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.name{
-font-size:48rpx;
-font-family:SourceHanSansCN-Medium;
-font-weight:500;
-color:rgba(51,51,51,1);
+
+.name text{
+  font-size: 48rpx;
+  font-family: SourceHanSansCN-Medium;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 1);
+  display: inline-block;
+  width: 510rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
 }
+
 /* search end */

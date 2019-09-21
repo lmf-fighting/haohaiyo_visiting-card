@@ -49,14 +49,16 @@ Page({
     }).get({
       success: function (s) {
         if (s.data.length > 0) {
-          for (var i = 0; i < s.data.length; i++) {
-            s.data[i].isTouchMove = false;
-          }
-
-          that.setData({
-            collection: s.data[0].collections,
-            collectionId: s.data[0]._id
-          })
+          if (s.data[0].collections.length!=0){
+            for (var i = 0; i < s.data[0].collections.length; i++) {
+              // s.data[i].isTouchMove = false;
+              s.data[0].collections[i].isTouchMove = false
+            }
+            that.setData({
+              collection: s.data[0].collections,
+              collectionId: s.data[0]._id
+            })
+          }    
         }
       },
       fail: function (s) {

@@ -6,7 +6,7 @@
   <view class='top'>
     <view class='top-t'>
       <text>{{cardInfo.company}}</text>
-      <image src='{{cardInfo.headicon}}'></image>    
+      <image src='{{headicon}}' bindtap="uploadHeadicon"></image> 
     </view>
     <view class='top-b'>
       <text class='text-name'>{{cardInfo.name}}</text>

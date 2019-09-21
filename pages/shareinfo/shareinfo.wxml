@@ -1,10 +1,10 @@
 <!--pages/sharecard/shardcard.wxml-->
 <view class='item'>
     <view wx:if="{{cardInfo.cardType==1}}">
-      <card1 cardInfo="{{cardInfo}}"></card1>
+      <card1 cardInfo="{{cardInfo}}" headicon="{{cardInfo.headicon}}"></card1>
     </view>
     <view wx:else>
-      <card2 cardInfo="{{cardInfo}}"></card2>
+      <card2 cardInfo="{{cardInfo}}" headicon="{{cardInfo.headicon}}"></card2>
     </view>
   <view class='function'>
     <button class='bt' data-oid="{{cardInfo._openid}}" bindtap="chooseCollectionType">

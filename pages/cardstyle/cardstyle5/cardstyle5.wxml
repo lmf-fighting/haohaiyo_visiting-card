@@ -4,7 +4,7 @@
       <view class='text'>当前样式</view>
     </view>
   <view class='left'>
-    <image src='{{cardInfo.headicon}}'></image>
+    <image src='{{headicon}}' bindtap="uploadHeadicon"></image>
     <text class='text-name'>{{cardInfo.name}}</text>
     <text class='text-op'>{{cardInfo.jobInfo}}</text>
   </view>

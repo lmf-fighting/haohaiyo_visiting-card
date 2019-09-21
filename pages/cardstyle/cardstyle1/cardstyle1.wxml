@@ -7,9 +7,11 @@
       <text class='name'>{{cardInfo.name}}</text>
       <text class='op'>{{cardInfo.jobInfo}}</text>
     </view>
-    <image src='{{cardInfo.headicon}}'></image>
+    <view bindtap="uploadHeadicon">
+    <image src="{{headicon}}"></image>
+    </view>
+    
   </view>
-
 
   <view class='bottom'>
     <text class='text1'>{{cardInfo.company}}</text>

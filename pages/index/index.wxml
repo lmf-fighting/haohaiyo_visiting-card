@@ -2,19 +2,19 @@
 <view class='item'>
   <view class='top'>
     <view wx:if="{{cardInfo.cardType==1}}">
-      <card1 cardInfo="{{cardInfo}}"></card1>
+      <card1 cardInfo="{{cardInfo}}" headicon="{{cardInfo.headicon}}"></card1>
     </view>
     <view wx:elif="{{cardInfo.cardType==2}}">
-      <card2 cardInfo="{{cardInfo}}"></card2>
+      <card2 cardInfo="{{cardInfo}}" headicon="{{cardInfo.headicon}}"></card2>
     </view>
     <view wx:elif="{{cardInfo.cardType==3}}">
-      <card3 cardInfo="{{cardInfo}}"></card3>
+      <card3 cardInfo="{{cardInfo}}" headicon="{{cardInfo.headicon}}"></card3>
     </view>
     <view wx:elif="{{cardInfo.cardType==4}}">
-      <card4 cardInfo="{{cardInfo}}"></card4>
+      <card4 cardInfo="{{cardInfo}}" headicon="{{cardInfo.headicon}}"></card4>
     </view>
     <view wx:else>
-    <card5 cardInfo="{{cardInfo}}"></card5>
+    <card5 cardInfo="{{cardInfo}}" headicon="{{cardInfo.headicon}}"></card5>
     </view>
 
   </view>

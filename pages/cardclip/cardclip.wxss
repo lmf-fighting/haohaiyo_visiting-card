@@ -1,8 +1,8 @@
 page {
   margin: 0;
   padding: 0;
-  width: 750px;
-  height: 1216px;
+  width: 750rpx;
+  height: 1200rpx;
   background: #fff;
 }
 
@@ -76,10 +76,25 @@ page {
   background: rgba(255, 255, 255, 1);
   position: absolute;
   top: 12%;
-  left: 10rpx;
+  /* left: 10rpx; */
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+}
+.content .none {
+  color: rgba(156, 162, 187, 1);
+  font-family: 宋体;
+  font-size: 40rpx;
+  margin: auto auto;
+  background: rgba(249, 249, 249, 1);
+  text-align: center;
+  display: block;
+}
+
+.touch-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 /*表格样式*/
@@ -100,6 +115,7 @@ page {
   align-items: center;
   border-bottom: 1rpx solid rgb(241, 236, 236);
 }
+
 
 .td {
   /*表格行*/
@@ -126,23 +142,14 @@ page {
   font-family: SourceHanSansCN-Medium;
   font-weight: 500;
   color: rgba(51, 51, 51, 1);
+  display: inline-block;
+  width: 550rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.content .none {
-  color: rgba(156, 162, 187, 1);
-  font-family: 宋体;
-  font-size: 40rpx;
-  margin: auto auto;
-  background: rgba(249, 249, 249, 1);
-  text-align: center;
-  display: block;
-}
 
-.touch-item {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
 
 .tr{
   width: 100%;
@@ -178,7 +185,7 @@ page {
   display: flex;
   flex-direction: column;
   width: 750rpx;
-
+  /* border: 1rpx solid black; */
 }
 
 
@@ -195,6 +202,7 @@ page {
   font-family: SourceHanSansCN-Medium;
   font-weight: Medium;
   display: block;
+  /* margin-top: 10rpx; */
 }
 
 .item-text .text2{

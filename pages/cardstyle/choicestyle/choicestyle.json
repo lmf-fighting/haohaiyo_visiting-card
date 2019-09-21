@@ -5,5 +5,6 @@
     "card3": "/pages/cardstyle/cardstyle3/cardstyle3",
     "card4": "/pages/cardstyle/cardstyle4/cardstyle4",
     "card5": "/pages/cardstyle/cardstyle5/cardstyle5"
-  }
+  },
+    "navigationBarTitleText": "点击您喜欢的样式"
 }

@@ -24,7 +24,7 @@
             <image src='/images/cardclip/del.png' style="width:40rpx;height:40rpx"></image>
           </view>
         </view>
-        <view wx:if="{{collection.length<=0}}" class='item'>
+        <view wx:if="{{collection==null}}" class='item'>
           <view class='item-text'>
             <text class='text1'>您还没有收藏名片</text>
             <text class='text2'>快来去收藏名片，积累人脉吧~</text>

@@ -84,6 +84,7 @@ Page({
         if (res.data.length > 0) {//进入个人主页
           app.globalData.cardInfo = res.data[0];
           str = '/pages/index/index';
+          //str ='/pages/shareinfo/shareinfo';
         } else {//进入提示页
           str = '/pages/tip/tip';
         }

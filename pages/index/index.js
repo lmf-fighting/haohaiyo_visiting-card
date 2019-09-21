@@ -10,11 +10,28 @@ Page({
     collectionNum: 0
   },
   onLoad: function () {
-    this.setData({ cardInfo: app.globalData.cardInfo })
-    //人气
-    this.getPopularityNum();
-    //收藏
-    this.getCollectionNum();
+    this.getCardInfo()
+  },
+  getCardInfo:function(){
+    console.log("---")
+    console.log(app.globalData.openId)
+    var that=this;
+    const db = wx.cloud.database()
+    db.collection('cardInfo').where({
+      _openid: app.globalData.openId
+    }).get({
+      success: function (res) {
+        console.log(res)
+        if(res.data.length>0){
+          that.setData({ cardInfo: res.data[0] })
+          app.globalData.cardInfo=res.data[0]
+          //人气
+          that.getPopularityNum();
+          //收藏
+          that.getCollectionNum();
+        }
+      }
+    })
   },
   //人气数量
   getPopularityNum: function () {
